@@ -5,6 +5,7 @@ import { Navigation } from './components/Navigation';
 import { SettingsModal } from './components/SettingsModal';
 import { ReportsPage } from './components/ReportsPage';
 import { preloadSounds } from './utils/soundUtils';
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 interface Settings {
   timerDurations: {
@@ -483,6 +484,7 @@ export function App() {
         settings={settings} 
         onSettingsChange={setSettings} 
       />
+      <SpeedInsights />
     </div>
   );
 }
