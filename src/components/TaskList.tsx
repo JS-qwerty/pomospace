@@ -188,7 +188,7 @@ export const TaskList: React.FC<TaskListProps> = ({
       </h2>
       
       {/* Task Input Form - Now in a container box similar to timer */}
-      <div className="mb-8 bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-lg max-w-md mx-auto">
+      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-lg mb-8 mx-auto">
         <div className="relative mb-4">
           <input 
             type="text" 
@@ -200,22 +200,22 @@ export const TaskList: React.FC<TaskListProps> = ({
           />
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-3 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-4">
           {/* Pomodoro Counter */}
           <div className="flex items-center">
-            <span className="text-white mr-2 w-[100px] sm:w-auto">Pomodoros:</span>
-            <div className="inline-flex items-center justify-between bg-indigo-500/50 border border-indigo-500/40 rounded-lg h-10 flex-1 max-w-[180px] px-1 sm:px-0">
+            <span className="text-white mr-2 whitespace-nowrap">Pomodoros:</span>
+            <div className="inline-flex items-center justify-between bg-indigo-500/50 border border-indigo-500/40 rounded-lg h-10 flex-1 max-w-[180px] px-1">
               <button 
-                className="w-9 sm:w-8 h-9 sm:h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-lg sm:rounded-l-lg sm:rounded-r-none"
+                className="w-8 h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-l-lg"
                 onClick={() => setEstimatedPomodoros(Math.max(1, estimatedPomodoros - 1))}
               >
                 −
               </button>
-              <span className="w-9 sm:w-8 h-9 sm:h-10 flex items-center justify-center text-white text-lg font-medium">
+              <span className="w-8 h-10 flex items-center justify-center text-white text-lg font-medium">
                 {estimatedPomodoros}
               </span>
               <button 
-                className="w-9 sm:w-8 h-9 sm:h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-lg sm:rounded-r-lg sm:rounded-l-none"
+                className="w-8 h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-r-lg"
                 onClick={() => setEstimatedPomodoros(estimatedPomodoros + 1)}
               >
                 +
@@ -224,12 +224,12 @@ export const TaskList: React.FC<TaskListProps> = ({
           </div>
           
           {/* Category selector */}
-          <div className="flex items-center justify-start">
-            <span className="text-white mr-2 w-[100px] sm:w-auto">Category:</span>
-            <div className="relative flex-grow max-w-xs">
+          <div className="flex items-center">
+            <span className="text-white mr-2 whitespace-nowrap">Category:</span>
+            <div className="relative flex-grow">
               <button
                 onClick={() => setShowCategorySelect(!showCategorySelect)}
-                className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 py-0 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
+                className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
               >
                 <span className="truncate">{selectedCategory}</span>
                 <ChevronDownIcon size={16} className="ml-1 flex-shrink-0 transition-transform duration-200" style={{ transform: showCategorySelect ? 'rotate(180deg)' : 'rotate(0deg)' }} />
@@ -257,12 +257,12 @@ export const TaskList: React.FC<TaskListProps> = ({
           </div>
           
           {/* Priority selector */}
-          <div className="flex items-center justify-start">
-            <span className="text-white mr-2 w-[100px] sm:w-auto">Priority:</span>
-            <div className="relative flex-grow max-w-xs">
+          <div className="flex items-center">
+            <span className="text-white mr-2 whitespace-nowrap">Priority:</span>
+            <div className="relative flex-grow">
               <button
                 onClick={() => setShowPrioritySelect(!showPrioritySelect)}
-                className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 py-0 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
+                className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
               >
                 <div className="flex items-center overflow-hidden">
                   <FlagIcon size={16} className="mr-1 flex-shrink-0" />
