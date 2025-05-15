@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PomoSpace Sound Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #4f46e5;
+      color: white;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .sound-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .sound-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      background-color: white;
+      color: #4f46e5;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background-color: #f0f0f0;
+    }
+    h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>PomoSpace Sound Test</h1>
+  
+  <div class="sound-grid">
+    <div class="sound-card">
+      <h2>Alarm Sounds</h2>
+      <div>
+        <button onclick="playSound('/sounds/alarm-kitchen.mp3')">Alarm Clock</button>
+        <button onclick="playSound('/sounds/alarm-digital.mp3')">Digital</button>
+        <button onclick="playSound('/sounds/alarm-bell.mp3')">Pager</button>
+      </div>
+    </div>
+    
+    <div class="sound-card">
+      <h2>Ticking Sounds</h2>
+      <div>
+        <button onclick="playSound('/sounds/ticking-mechanical.mp3', true)">Clock</button>
+        <button onclick="playSound('/sounds/ticking-digital.mp3', true)">Car Blinker</button>
+        <button onclick="stopSound()">Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let audioElement = null;
+    
+    function playSound(soundPath, loop = false) {
+      // Stop any currently playing sound
+      if (audioElement) {
+        audioElement.pause();
+        audioElement = null;
+      }
+      
+      // Create and play the new sound
+      audioElement = new Audio(soundPath);
+      audioElement.loop = loop;
+      audioElement.play().catch(err => {
+        console.error('Error playing sound:', err);
+        alert('Error playing sound: ' + err.message);
+      });
+    }
+    
+    function stopSound() {
+      if (audioElement) {
+        audioElement.pause();
+        audioElement = null;
+      }
+    }
+  </script>
+</body>
+</html> 

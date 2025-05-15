@@ -1,0 +1,17 @@
+For a production application, you would need to add the following sound files to this directory:
+
+1. ticking-mechanical.mp3 - A mechanical clock ticking sound
+2. ticking-digital.mp3 - A digital ticking sound
+3. alarm-kitchen.mp3 - A kitchen timer alarm sound
+4. alarm-digital.mp3 - A digital alarm sound
+5. alarm-bell.mp3 - A bell alarm sound
+
+These sound files should be short, optimized MP3 files. You can find free sound effects at:
+- FreeSound.org
+- SoundBible.com
+- ZapSplat.com
+
+For the ticking sounds, a 1-2 second file that's set to loop works best.
+For alarm sounds, 2-5 second files are ideal.
+
+Make sure you have appropriate rights to use any sounds in your application. 
