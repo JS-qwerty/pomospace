@@ -446,26 +446,28 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   // Effect to handle settings changes
   useEffect(() => {
     // For each timer type, update the duration based on settings
-    // but preserve progress percentage if the timer is active
     const updatedTimerStates = { ...timerStates };
     
     ['pomodoro', 'shortBreak', 'longBreak'].forEach(mode => {
       const timerMode = mode as keyof typeof timerStates;
       const currentState = timerStates[timerMode];
       const newFullDuration = getDuration(mode, settings);
+      const oldFullDuration = getDuration(mode, { 
+        ...settings, 
+        timerDurations: { 
+          ...settings.timerDurations 
+        } 
+      });
       
-      // If the timer is active or partially complete, preserve progress
-      if (currentState.isActive || (currentState.timeRemaining < getDuration(mode, settings))) {
-        // Calculate current progress percentage
-        const originalDuration = getDuration(mode, { 
-          ...settings, 
-          timerDurations: { ...settings.timerDurations } 
-        });
-        const elapsedTime = Math.max(0, originalDuration - currentState.timeRemaining);
-        const progressPercentage = originalDuration > 0 ? elapsedTime / originalDuration : 0;
+      // If the timer is active OR partially completed, preserve elapsed time
+      if (currentState.isActive || (currentState.timeRemaining < oldFullDuration)) {
+        // Calculate current elapsed time in seconds
+        const elapsedTime = Math.max(0, oldFullDuration - currentState.timeRemaining);
         
-        // Apply the same progress percentage to the new duration
-        const newTimeRemaining = Math.max(1, Math.round(newFullDuration - (progressPercentage * newFullDuration)));
+        // Apply the new duration but keep the exact elapsed time
+        // This means if 5:07 has elapsed on a 25min timer, and user changes to 27min,
+        // the new timer should show 27:00 - 5:07 = 21:53
+        const newTimeRemaining = Math.max(1, newFullDuration - elapsedTime);
         
         // Update the timer state
         updatedTimerStates[timerMode] = {
@@ -478,7 +480,7 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
           setTimeRemaining(newTimeRemaining);
         }
       } else {
-        // If the timer is not active, just set to the full new duration
+        // If the timer is not active and not partially completed, set to full new duration
         updatedTimerStates[timerMode] = {
           ...currentState,
           timeRemaining: newFullDuration
