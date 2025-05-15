@@ -202,94 +202,100 @@ export const TaskList: React.FC<TaskListProps> = ({
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
           {/* Pomodoro Counter */}
-          <div className="flex items-center">
-            <span className="text-white mr-2 whitespace-nowrap">Pomodoros:</span>
-            <div className="inline-flex items-center justify-between bg-indigo-500/50 border border-indigo-500/40 rounded-lg h-10 flex-1 max-w-[180px] px-1">
-              <button 
-                className="w-8 h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-l-lg"
-                onClick={() => setEstimatedPomodoros(Math.max(1, estimatedPomodoros - 1))}
-              >
-                −
-              </button>
-              <span className="w-8 h-10 flex items-center justify-center text-white text-lg font-medium">
-                {estimatedPomodoros}
-              </span>
-              <button 
-                className="w-8 h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-r-lg"
-                onClick={() => setEstimatedPomodoros(estimatedPomodoros + 1)}
-              >
-                +
-              </button>
+          <div className="flex items-center w-full">
+            <div className="flex w-full items-center">
+              <span className="text-white mr-2 w-24 text-left">Pomodoros:</span>
+              <div className="inline-flex items-center justify-between bg-indigo-500/50 border border-indigo-500/40 rounded-lg h-10 flex-1">
+                <button 
+                  className="w-8 h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-l-lg"
+                  onClick={() => setEstimatedPomodoros(Math.max(1, estimatedPomodoros - 1))}
+                >
+                  −
+                </button>
+                <span className="w-8 h-10 flex items-center justify-center text-white text-lg font-medium">
+                  {estimatedPomodoros}
+                </span>
+                <button 
+                  className="w-8 h-10 flex items-center justify-center text-white hover:bg-indigo-500/60 active:bg-indigo-500/80 transition-all duration-150 rounded-r-lg"
+                  onClick={() => setEstimatedPomodoros(estimatedPomodoros + 1)}
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
           
           {/* Category selector */}
-          <div className="flex items-center">
-            <span className="text-white mr-2 whitespace-nowrap">Category:</span>
-            <div className="relative flex-grow">
-              <button
-                onClick={() => setShowCategorySelect(!showCategorySelect)}
-                className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
-              >
-                <span className="truncate">{selectedCategory}</span>
-                <ChevronDownIcon size={16} className="ml-1 flex-shrink-0 transition-transform duration-200" style={{ transform: showCategorySelect ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-              </button>
-              
-              {showCategorySelect && (
-                <div className="absolute z-50 mt-1 rounded-lg shadow-lg bg-indigo-600/95 backdrop-blur-md w-full">
-                  <div className="py-1 max-h-60 overflow-y-auto">
-                    {CATEGORIES.map(category => (
-                      <button
-                        key={category}
-                        className={`w-full text-left px-3 py-2 text-white hover:bg-indigo-700/70 transition-colors duration-200 ${selectedCategory === category ? 'font-semibold bg-indigo-700/50' : ''}`}
-                        onClick={() => {
-                          setSelectedCategory(category);
-                          setShowCategorySelect(false);
-                        }}
-                      >
-                        {category}
-                      </button>
-                    ))}
+          <div className="flex items-center w-full">
+            <div className="flex w-full items-center">
+              <span className="text-white mr-2 w-24 text-left">Category:</span>
+              <div className="relative flex-grow">
+                <button
+                  onClick={() => setShowCategorySelect(!showCategorySelect)}
+                  className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
+                >
+                  <span className="truncate">{selectedCategory}</span>
+                  <ChevronDownIcon size={16} className="ml-1 flex-shrink-0 transition-transform duration-200" style={{ transform: showCategorySelect ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                </button>
+                
+                {showCategorySelect && (
+                  <div className="absolute z-50 mt-1 rounded-lg shadow-lg bg-indigo-600/95 backdrop-blur-md w-full">
+                    <div className="py-1 max-h-60 overflow-y-auto">
+                      {CATEGORIES.map(category => (
+                        <button
+                          key={category}
+                          className={`w-full text-left px-3 py-2 text-white hover:bg-indigo-700/70 transition-colors duration-200 ${selectedCategory === category ? 'font-semibold bg-indigo-700/50' : ''}`}
+                          onClick={() => {
+                            setSelectedCategory(category);
+                            setShowCategorySelect(false);
+                          }}
+                        >
+                          {category}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
           
           {/* Priority selector - Now on same line in desktop view */}
-          <div className="flex items-center">
-            <span className="text-white mr-2 whitespace-nowrap">Priority:</span>
-            <div className="relative flex-grow">
-              <button
-                onClick={() => setShowPrioritySelect(!showPrioritySelect)}
-                className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
-              >
-                <div className="flex items-center overflow-hidden">
-                  <FlagIcon size={16} className="mr-1 flex-shrink-0" />
-                  <span className="truncate">{PRIORITIES.find(p => p.value === selectedPriority)?.label}</span>
-                </div>
-                <ChevronDownIcon size={16} className="ml-1 flex-shrink-0 transition-transform duration-200" style={{ transform: showPrioritySelect ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-              </button>
-              
-              {showPrioritySelect && (
-                <div className="absolute z-50 mt-1 rounded-lg shadow-lg bg-indigo-600/95 backdrop-blur-md w-full right-0">
-                  <div className="py-1 max-h-60 overflow-y-auto">
-                    {PRIORITIES.map(priority => (
-                      <button
-                        key={priority.value}
-                        className={`w-full text-left px-3 py-2 text-white hover:bg-indigo-700/70 transition-colors duration-200 flex items-center ${selectedPriority === priority.value ? 'font-semibold bg-indigo-700/50' : ''}`}
-                        onClick={() => {
-                          setSelectedPriority(priority.value as 'low' | 'medium' | 'high');
-                          setShowPrioritySelect(false);
-                        }}
-                      >
-                        <FlagIcon size={14} className="mr-1 flex-shrink-0" style={{ color: priority.color === 'red' ? '#f56565' : priority.color === 'yellow' ? '#ecc94b' : '#4299e1' }} />
-                        {priority.label}
-                      </button>
-                    ))}
+          <div className="flex items-center w-full">
+            <div className="flex w-full items-center">
+              <span className="text-white mr-2 w-24 text-left">Priority:</span>
+              <div className="relative flex-grow">
+                <button
+                  onClick={() => setShowPrioritySelect(!showPrioritySelect)}
+                  className="flex items-center bg-indigo-500/50 border border-indigo-500/40 px-3 rounded-lg text-white hover:bg-indigo-500/60 transition-colors duration-200 justify-between h-10 w-full"
+                >
+                  <div className="flex items-center overflow-hidden">
+                    <FlagIcon size={16} className="mr-1 flex-shrink-0" />
+                    <span className="truncate">{PRIORITIES.find(p => p.value === selectedPriority)?.label}</span>
                   </div>
-                </div>
-              )}
+                  <ChevronDownIcon size={16} className="ml-1 flex-shrink-0 transition-transform duration-200" style={{ transform: showPrioritySelect ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                </button>
+                
+                {showPrioritySelect && (
+                  <div className="absolute z-50 mt-1 rounded-lg shadow-lg bg-indigo-600/95 backdrop-blur-md w-full right-0">
+                    <div className="py-1 max-h-60 overflow-y-auto">
+                      {PRIORITIES.map(priority => (
+                        <button
+                          key={priority.value}
+                          className={`w-full text-left px-3 py-2 text-white hover:bg-indigo-700/70 transition-colors duration-200 flex items-center ${selectedPriority === priority.value ? 'font-semibold bg-indigo-700/50' : ''}`}
+                          onClick={() => {
+                            setSelectedPriority(priority.value as 'low' | 'medium' | 'high');
+                            setShowPrioritySelect(false);
+                          }}
+                        >
+                          <FlagIcon size={14} className="mr-1 flex-shrink-0" style={{ color: priority.color === 'red' ? '#f56565' : priority.color === 'yellow' ? '#ecc94b' : '#4299e1' }} />
+                          {priority.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
