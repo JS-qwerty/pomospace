@@ -52,13 +52,36 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     // Apply a maximum value
     const validValue = Math.min(numValue, maxValues[timerKey]);
     
-    onSettingsChange({
+    // Force an immediate update by adding a timestamp
+    const updatedSettings = {
       ...settings,
       timerDurations: {
         ...settings.timerDurations,
         [timerType]: validValue
+      },
+      lastUpdated: Date.now() // Add a timestamp to force re-renders
+    };
+    
+    // Apply the settings update
+    onSettingsChange(updatedSettings);
+    
+    // Special treatment when changing pomodoro duration - add a flag to signal this
+    if (timerType === 'pomodoro') {
+      // Clear localStorage timer state to force a reset the next time the page loads
+      try {
+        const timerState = localStorage.getItem('pomoSpaceTimerState');
+        if (timerState) {
+          const parsedState = JSON.parse(timerState);
+          if (parsedState && parsedState.timerStates && parsedState.timerStates.pomodoro) {
+            // Signal that there was a settings change
+            parsedState.timerStates.pomodoro.settingsChanged = true;
+            localStorage.setItem('pomoSpaceTimerState', JSON.stringify(parsedState));
+          }
+        }
+      } catch (e) {
+        console.error('Error updating timer state:', e);
       }
-    });
+    }
   };
   
   // Toggle boolean settings

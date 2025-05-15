@@ -23,6 +23,7 @@ interface Settings {
     tickingSound: string;
     tickingVolume: number;
   };
+  lastUpdated?: number; // Timestamp to force timer resets when settings change
 }
 
 interface TaskItem {

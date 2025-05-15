@@ -26,6 +26,7 @@ interface Settings {
     alarmVolume: number;
     alarmRepeat: number;
   };
+  lastUpdated?: number; // Optional timestamp for settings updates
 }
 
 interface PomodoroTimerProps {
@@ -43,11 +44,12 @@ interface TimerState {
   activeTimestamp?: number; // When the timer was last known to be active
   timerMode: string;
   originalDuration?: number;
+  settingsChanged?: boolean; // Flag to indicate settings were changed
   // Individual timer states
   timerStates: {
-    pomodoro: { timeRemaining: number; isActive: boolean };
-    shortBreak: { timeRemaining: number; isActive: boolean };
-    longBreak: { timeRemaining: number; isActive: boolean };
+    pomodoro: { timeRemaining: number; isActive: boolean; settingsChanged?: boolean };
+    shortBreak: { timeRemaining: number; isActive: boolean; settingsChanged?: boolean };
+    longBreak: { timeRemaining: number; isActive: boolean; settingsChanged?: boolean };
   };
 }
 
@@ -170,7 +172,8 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
               isActive: false,
               completedPomodoros: newCompletedPomodoros,
               timerMode: newMode || timerMode,
-              timerStates: parsedState.timerStates
+              timerStates: parsedState.timerStates,
+              settingsChanged: false
             };
           }
           
@@ -178,7 +181,8 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
           return {
             ...parsedState,
             timeRemaining: newTimeRemaining,
-            activeTimestamp: parsedState.isActive ? now : undefined
+            activeTimestamp: parsedState.isActive ? now : undefined,
+            settingsChanged: false
           };
         }
         
@@ -199,7 +203,8 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
         pomodoro: { timeRemaining: getDuration('pomodoro', settings), isActive: false },
         shortBreak: { timeRemaining: getDuration('shortBreak', settings), isActive: false },
         longBreak: { timeRemaining: getDuration('longBreak', settings), isActive: false }
-      }
+      },
+      settingsChanged: false
     };
   };
   
@@ -245,7 +250,8 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
         activeTimestamp: isActive ? Date.now() : undefined,
         timerMode: currentTimerMode,
         originalDuration,
-        timerStates: allTimerStates
+        timerStates: allTimerStates,
+        settingsChanged: false
       };
       
       localStorage.setItem('pomoSpaceTimerState', JSON.stringify(timerState));
@@ -501,8 +507,27 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
         } 
       });
       
-      // If the timer is active OR partially completed, preserve elapsed time
-      if (currentState.isActive || (currentState.timeRemaining < oldFullDuration)) {
+      // For pomodoro timer, always reset to full duration when settings change
+      if (mode === 'pomodoro') {
+        // Reset the pomodoro timer to the full new duration
+        updatedTimerStates[timerMode] = {
+          ...currentState,
+          timeRemaining: newFullDuration,
+          settingsChanged: false
+        };
+        
+        // If this is the current timer, update the displayed time to full duration
+        if (mode === timerMode) {
+          setTimeRemaining(newFullDuration);
+          if (isActive) {
+            // If timer is running, restart it with new duration
+            setIsActive(false);
+            setTimeout(() => setIsActive(true), 100);
+          }
+        }
+      }
+      // For other timers, preserve elapsed time if running
+      else if (currentState.isActive || (currentState.timeRemaining < oldFullDuration)) {
         // Calculate current elapsed time in seconds
         const elapsedTime = Math.max(0, oldFullDuration - currentState.timeRemaining);
         
@@ -539,7 +564,7 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
     setTimerStates(updatedTimerStates);
     updateTimerState(timerMode, timeRemaining, isActive, completedPomodoros, updatedTimerStates);
     
-  }, [settings.timerDurations]);
+  }, [settings.timerDurations, settings.lastUpdated]);
   
   return (
     <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-lg mb-8">
