@@ -187,8 +187,8 @@ export const TaskList: React.FC<TaskListProps> = ({
         Tasks
       </h2>
       
-      {/* Task Input Form - Now in a container box similar to timer */}
-      <div className="w-full bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-lg mb-8 mx-auto">
+      {/* Task Input Form - No box container, just clean controls */}
+      <div className="w-full mb-8 mx-auto">
         <div className="relative mb-4">
           <input 
             type="text" 
