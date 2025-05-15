@@ -188,12 +188,12 @@ export const TaskList: React.FC<TaskListProps> = ({
       </h2>
       
       {/* Task Input Form - Now in a container box similar to timer */}
-      <div className="mb-8 bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+      <div className="mb-8 bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-lg max-w-3xl mx-auto">
         <div className="relative mb-4">
           <input 
             type="text" 
             placeholder="What are you working on?" 
-            className="w-full p-4 bg-white/10 border-0 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white/30 placeholder-white/70" 
+            className="w-full p-4 bg-white/15 border border-white/10 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white/30 placeholder-white/70" 
             value={newTaskText} 
             onChange={e => setNewTaskText(e.target.value)} 
             onKeyPress={e => e.key === 'Enter' && addTask()} 
@@ -204,9 +204,9 @@ export const TaskList: React.FC<TaskListProps> = ({
           {/* Pomodoro Counter */}
           <div className="flex items-center">
             <span className="text-white mr-2 w-[100px] sm:w-auto">Pomodoros:</span>
-            <div className="inline-flex items-center justify-between bg-indigo-500/30 rounded-lg h-10 flex-1 max-w-[180px] px-1 sm:px-0">
+            <div className="inline-flex items-center justify-between bg-indigo-500/40 border border-indigo-500/30 rounded-lg h-10 flex-1 max-w-[180px] px-1 sm:px-0">
               <button 
-                className="w-9 sm:w-8 h-9 sm:h-10 flex items-center justify-center text-white hover:bg-indigo-500/40 active:bg-indigo-500/60 transition-all duration-150 rounded-lg sm:rounded-l-lg sm:rounded-r-none"
+                className="w-9 sm:w-8 h-9 sm:h-10 flex items-center justify-center text-white hover:bg-indigo-500/50 active:bg-indigo-500/70 transition-all duration-150 rounded-lg sm:rounded-l-lg sm:rounded-r-none"
                 onClick={() => setEstimatedPomodoros(Math.max(1, estimatedPomodoros - 1))}
               >
                 −
@@ -215,7 +215,7 @@ export const TaskList: React.FC<TaskListProps> = ({
                 {estimatedPomodoros}
               </span>
               <button 
-                className="w-9 sm:w-8 h-9 sm:h-10 flex items-center justify-center text-white hover:bg-indigo-500/40 active:bg-indigo-500/60 transition-all duration-150 rounded-lg sm:rounded-r-lg sm:rounded-l-none"
+                className="w-9 sm:w-8 h-9 sm:h-10 flex items-center justify-center text-white hover:bg-indigo-500/50 active:bg-indigo-500/70 transition-all duration-150 rounded-lg sm:rounded-r-lg sm:rounded-l-none"
                 onClick={() => setEstimatedPomodoros(estimatedPomodoros + 1)}
               >
                 +
@@ -229,7 +229,7 @@ export const TaskList: React.FC<TaskListProps> = ({
             <div className="relative flex-grow max-w-xs">
               <button
                 onClick={() => setShowCategorySelect(!showCategorySelect)}
-                className="flex items-center bg-indigo-500/30 px-3 py-0 rounded-lg text-white hover:bg-indigo-500/40 transition-colors duration-200 justify-between h-10 w-full"
+                className="flex items-center bg-indigo-500/40 border border-indigo-500/30 px-3 py-0 rounded-lg text-white hover:bg-indigo-500/50 transition-colors duration-200 justify-between h-10 w-full"
               >
                 <span className="truncate">{selectedCategory}</span>
                 <ChevronDownIcon size={16} className="ml-1 flex-shrink-0 transition-transform duration-200" style={{ transform: showCategorySelect ? 'rotate(180deg)' : 'rotate(0deg)' }} />
@@ -262,7 +262,7 @@ export const TaskList: React.FC<TaskListProps> = ({
             <div className="relative flex-grow max-w-xs">
               <button
                 onClick={() => setShowPrioritySelect(!showPrioritySelect)}
-                className="flex items-center bg-indigo-500/30 px-3 py-0 rounded-lg text-white hover:bg-indigo-500/40 transition-colors duration-200 justify-between h-10 w-full"
+                className="flex items-center bg-indigo-500/40 border border-indigo-500/30 px-3 py-0 rounded-lg text-white hover:bg-indigo-500/50 transition-colors duration-200 justify-between h-10 w-full"
               >
                 <div className="flex items-center overflow-hidden">
                   <FlagIcon size={16} className="mr-1 flex-shrink-0" />
