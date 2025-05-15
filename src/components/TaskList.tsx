@@ -297,7 +297,7 @@ export const TaskList: React.FC<TaskListProps> = ({
         {/* Add Task button - Now positioned below all options and with a more distinctive color */}
         <div className="flex justify-center mt-4">
           <button 
-            className="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
+            className="bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
             onClick={addTask}
           >
             <PlusIcon size={20} className="mr-2" />
