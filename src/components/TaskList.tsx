@@ -189,26 +189,18 @@ export const TaskList: React.FC<TaskListProps> = ({
       
       {/* Task Input */}
       <div className="mb-8">
-        <div className="relative mb-4 flex flex-col sm:flex-row gap-3">
+        <div className="relative mb-4">
           <input 
             type="text" 
             placeholder="What are you working on?" 
-            className="flex-grow p-4 bg-white/10 border-0 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white/30 placeholder-white/70" 
+            className="w-full p-4 bg-white/10 border-0 text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-white/30 placeholder-white/70" 
             value={newTaskText} 
             onChange={e => setNewTaskText(e.target.value)} 
             onKeyPress={e => e.key === 'Enter' && addTask()} 
           />
-          
-          {/* Add Task button */}
-          <button 
-            className="bg-indigo-500/30 hover:bg-indigo-500/50 active:bg-indigo-500/70 text-white px-6 py-2 rounded-lg flex items-center justify-center transition-all duration-150 font-medium whitespace-nowrap"
-            onClick={addTask}
-          >
-            Add Task
-          </button>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-3 mb-4">
           {/* Pomodoro Counter */}
           <div className="flex items-center">
             <span className="text-white mr-2 w-[100px] sm:w-auto">Pomodoros:</span>
@@ -300,6 +292,17 @@ export const TaskList: React.FC<TaskListProps> = ({
               )}
             </div>
           </div>
+        </div>
+        
+        {/* Add Task button - Now positioned below all options and with a more distinctive color */}
+        <div className="flex justify-center mt-4">
+          <button 
+            className="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
+            onClick={addTask}
+          >
+            <PlusIcon size={20} className="mr-2" />
+            Add Task
+          </button>
         </div>
       </div>
       
