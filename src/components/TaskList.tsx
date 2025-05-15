@@ -301,7 +301,7 @@ export const TaskList: React.FC<TaskListProps> = ({
         </div>
         
         {/* Add Task button - Half width on desktop and centered */}
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center sm:justify-start mt-4">
           <button 
             className="w-full sm:w-1/2 bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
             onClick={addTask}
