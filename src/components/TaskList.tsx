@@ -183,7 +183,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   
   return (
     <div className="w-full p-6">
-      <h2 className="text-3xl font-bold text-white mb-6">
+      <h2 className="text-3xl font-bold text-white mb-4">
         Tasks
       </h2>
       
