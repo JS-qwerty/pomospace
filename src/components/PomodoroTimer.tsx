@@ -103,6 +103,14 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
           };
         }
         
+        // Always ensure pomodoro timer shows full duration (25 min) when not running
+        if (parsedState.timerMode === 'pomodoro' && !parsedState.isActive) {
+          parsedState.timeRemaining = getDuration('pomodoro', settings);
+          if (parsedState.timerStates && parsedState.timerStates.pomodoro) {
+            parsedState.timerStates.pomodoro.timeRemaining = getDuration('pomodoro', settings);
+          }
+        }
+        
         // If timer was active, calculate elapsed time since last active timestamp
         if (parsedState.isActive && parsedState.activeTimestamp) {
           const now = Date.now();
@@ -287,6 +295,27 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
     
     // Load the state for the selected timer
     const timerState = timerStates[timerMode as keyof typeof timerStates];
+    
+    // For pomodoro, always reset to full duration (25 min) when switching to it
+    if (timerMode === 'pomodoro') {
+      const fullDuration = getDuration('pomodoro', settings);
+      setTimeRemaining(fullDuration);
+      setIsActive(false);
+      
+      // Update timer states with full duration for pomodoro
+      const updatedTimerStates = {
+        ...timerStates,
+        [timerMode]: {
+          timeRemaining: fullDuration,
+          isActive: false
+        }
+      };
+      
+      setTimerStates(updatedTimerStates);
+      updateTimerState(timerMode, fullDuration, false, completedPomodoros, updatedTimerStates);
+      return;
+    }
+    
     if (timerState) {
       console.log(`Loading timer state for ${timerMode}: `, timerState);
       setTimeRemaining(timerState.timeRemaining);
@@ -432,7 +461,20 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   // Reset the timer
   const resetTimer = () => {
     setIsActive(false);
-    setTimeRemaining(getDuration(timerMode, settings));
+    const fullDuration = getDuration(timerMode, settings);
+    setTimeRemaining(fullDuration);
+    
+    // Update the timer state for the current mode
+    const updatedTimerStates = {
+      ...timerStates,
+      [timerMode]: {
+        timeRemaining: fullDuration,
+        isActive: false
+      }
+    };
+    
+    setTimerStates(updatedTimerStates);
+    updateTimerState(timerMode, fullDuration, false, completedPomodoros, updatedTimerStates);
   };
   
   // Button color styles based on timer mode
