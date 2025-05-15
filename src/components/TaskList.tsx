@@ -294,14 +294,16 @@ export const TaskList: React.FC<TaskListProps> = ({
           </div>
         </div>
         
-        {/* Add Task button */}
-        <button 
-          className="w-full bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
-          onClick={addTask}
-        >
-          <PlusIcon size={20} className="mr-2" />
-          Add Task
-        </button>
+        {/* Add Task button - Half width on desktop and centered */}
+        <div className="flex justify-center mt-4">
+          <button 
+            className="w-full sm:w-1/2 bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
+            onClick={addTask}
+          >
+            <PlusIcon size={20} className="mr-2" />
+            Add Task
+          </button>
+        </div>
       </div>
       
       {/* Task List Header - For sorting options */}
