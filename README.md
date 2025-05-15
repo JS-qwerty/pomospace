@@ -38,6 +38,8 @@ A modern Pomodoro timer application to boost your productivity with beautiful UI
 
 PomoSpace is deployed on Vercel for optimal performance and reliability.
 
+Last updated: May 14, 2024
+
 ## License
 
 MIT
