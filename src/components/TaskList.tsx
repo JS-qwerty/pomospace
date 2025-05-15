@@ -182,13 +182,13 @@ export const TaskList: React.FC<TaskListProps> = ({
   };
   
   return (
-    <div className="w-full p-6">
+    <div className="w-full">
       <h2 className="text-3xl font-bold text-white mb-4">
         Tasks
       </h2>
       
       {/* Task Input Form - No box container, just clean controls */}
-      <div className="w-full mb-8 mx-auto max-w-md">
+      <div className="w-full mb-8 mx-auto">
         <div className="relative mb-4">
           <input 
             type="text" 
