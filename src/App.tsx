@@ -308,6 +308,13 @@ export function App() {
           )}
           */}
         </main>
+        
+        {/* Footer with credits */}
+        <footer className="text-center text-white/70 py-4 mt-8">
+          <p className="text-sm">
+            Made with ❤️ by <a href="https://www.linkedin.com/in/jonah-serna/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">Jonah Serna</a>
+          </p>
+        </footer>
       </div>
       <SettingsModal 
         isOpen={isSettingsOpen} 
