@@ -200,7 +200,7 @@ export const TaskList: React.FC<TaskListProps> = ({
           />
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
           {/* Pomodoro Counter */}
           <div className="flex items-center">
             <span className="text-white mr-2 whitespace-nowrap">Pomodoros:</span>
@@ -255,7 +255,9 @@ export const TaskList: React.FC<TaskListProps> = ({
               )}
             </div>
           </div>
-          
+        </div>
+        
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-1">
           {/* Priority selector */}
           <div className="flex items-center">
             <span className="text-white mr-2 whitespace-nowrap">Priority:</span>
@@ -292,12 +294,10 @@ export const TaskList: React.FC<TaskListProps> = ({
               )}
             </div>
           </div>
-        </div>
-        
-        {/* Add Task button */}
-        <div className="flex justify-center mt-5">
+          
+          {/* Add Task button */}
           <button 
-            className="bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
+            className="w-full sm:w-auto bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
             onClick={addTask}
           >
             <PlusIcon size={20} className="mr-2" />
