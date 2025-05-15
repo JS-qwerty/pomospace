@@ -187,8 +187,8 @@ export const TaskList: React.FC<TaskListProps> = ({
         Tasks
       </h2>
       
-      {/* Task Input */}
-      <div className="mb-8">
+      {/* Task Input Form - Now in a container box similar to timer */}
+      <div className="mb-8 bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-lg">
         <div className="relative mb-4">
           <input 
             type="text" 
@@ -294,8 +294,8 @@ export const TaskList: React.FC<TaskListProps> = ({
           </div>
         </div>
         
-        {/* Add Task button - Now positioned below all options and with a more distinctive color */}
-        <div className="flex justify-center mt-4">
+        {/* Add Task button */}
+        <div className="flex justify-center mt-5">
           <button 
             className="bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
             onClick={addTask}
