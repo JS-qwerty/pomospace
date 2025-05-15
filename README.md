@@ -40,6 +40,10 @@ PomoSpace is deployed on Vercel for optimal performance and reliability.
 
 Last updated: May 14, 2024
 
+## Credits
+
+Designed and developed by Jonah Serna.
+
 ## License
 
 MIT
