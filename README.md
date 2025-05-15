@@ -34,6 +34,10 @@ A modern Pomodoro timer application to boost your productivity with beautiful UI
    npm run build
    ```
 
+## Deployment
+
+PomoSpace is deployed on Vercel for optimal performance and reliability.
+
 ## License
 
 MIT
