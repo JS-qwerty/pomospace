@@ -300,10 +300,10 @@ export const TaskList: React.FC<TaskListProps> = ({
           </div>
         </div>
         
-        {/* Add Task button - Better sized for desktop and left-aligned */}
+        {/* Add Task button - 1/3 width on desktop and left-aligned */}
         <div className="flex justify-center sm:justify-start mt-4">
           <button 
-            className="w-full sm:w-[30%] bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
+            className="w-full sm:w-1/3 bg-white hover:bg-white/90 active:bg-white/80 text-indigo-900 px-8 py-3 rounded-lg flex items-center justify-center transition-all duration-150 font-medium text-base shadow-md"
             onClick={addTask}
           >
             <PlusIcon size={20} className="mr-2" />
